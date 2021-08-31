@@ -1,0 +1,81 @@
+﻿@model MVCBasics.Models.PeopleViewModel
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+<form style="float:right;width:70%">
+    <div class="row" >
+        <div class="col-md-2">
+            <input type="submit" value="Search" class="btn btn-primary" style="margin-top:32px"/>
+        </div>
+        @*<div class="col-md-2">
+            <label asp-for="city" class="control-label"></label>
+            <input id="search" asp-for="city" class="form-control" />
+        </div>*@
+        @*<div class="col-md-2">
+            <label asp-for="PhoneNumber" class="control-label"></label>
+            <input id="search" asp-for="PhoneNumber" class="form-control" />
+        </div>*@
+        <div class="col-md-2">
+            <label asp-for="Name" class="control-label"></label>
+            <input id="search" asp-for="Name" class="form-control" />
+        </div>
+        @*<div class="col-md-2">
+            <label asp-for="ID" class="control-label"></label>
+            <input id="search" asp-for="ID" class="form-control" />
+        </div>*@
+    </div>
+</form>
+
+<a asp-action="Create" 
+   style="float:right;
+clear:both; background:skyblue;
+display:block;
+text-decoration:none;
+border-radius:5px;margin:10px">Create New</a>
+
+
+<table class="table" style="background: skyblue;">
+    <thead>
+        <tr>
+            <th>
+               ID
+            </th>
+            <th>
+               Full Name
+            </th>
+            <th>
+               Phone Number
+            </th>
+            <th>
+               City
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model.people) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.ID)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.PhoneNumber)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.city)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new {  id=item.ID }) |
+                @Html.ActionLink("Details", "Edit", new { id=item.ID }) |
+                @Html.ActionLink("Delete", "Delete", new { id=item.ID })
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
