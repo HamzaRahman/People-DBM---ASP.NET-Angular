@@ -1,0 +1,19 @@
+﻿@model MVCBasics.Models.Person
+    <hr />
+    <div class="row">
+        <div class="col-sm-2">
+            @Html.DisplayFor(model => model.ID)
+        </div>
+        <div class="col-sm-2">
+            @Html.DisplayFor(model => model.Name)
+        </div>
+        <div class="col-sm-2">
+            @Html.DisplayFor(model => model.PhoneNumber)
+        </div>
+        <div class="col-sm-2">
+            @Html.DisplayFor(model => model.city)
+        </div>
+        <div class="col-sm-2">
+            @Html.ActionLink("Edit", "Edit", new { id = Model.ID })
+        </div>
+    </div>

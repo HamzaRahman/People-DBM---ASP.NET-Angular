@@ -28,8 +28,13 @@ namespace MVCBasics.Services
 
         public PeopleViewModel FindBy(PeopleViewModel Search)
         {
+            string[] parameters = Search.SearchPhrase.Split(new char[' ']);
             var people = PeopleDatabase.Read();
-            pvm.people = people.Where(p=>(p.Name.Contains(Search.Name))).ToList();
+            pvm.people = people.Where(person => parameters.Any(param =>
+                person.Name.Contains(param) ||
+                person.PhoneNumber.ToString().Contains(param) ||
+                person.city.Contains(param)
+                )).ToList();
             return pvm;
         }
 

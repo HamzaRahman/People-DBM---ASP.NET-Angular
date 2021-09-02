@@ -13,7 +13,7 @@ namespace MVCBasics.Controllers
         PeopleService ps = new PeopleService();
         public IActionResult Index(PeopleViewModel search)
         {
-            if(string.IsNullOrEmpty(search.Name))
+            if(string.IsNullOrEmpty(search.SearchPhrase))
             {
                 return View(ps.All());
             }
