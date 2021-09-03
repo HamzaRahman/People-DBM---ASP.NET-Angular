@@ -18,13 +18,16 @@ display:block;
 text-decoration:none;
 border-radius:5px;margin:10px">Create New</a>
 
-
-<div class="table" style="background: skyblue; float: right; clear: both;">
-    <div>
+<input type="text" id="DetailsID"/>
+<input type="button" value="People" id="LoadPeople"/>
+<input type="button" value="Details" id="PersonDetails" />
+<input type="button" value="Delete" id="PersonDelete" />
+<div id="PersonTable">
+    @*<div>
         <hr />
         <div class="row">
             <div class="col-sm-2">
-               ID
+                ID
             </div>
             <div class="col-sm-2">
                 Name
@@ -36,14 +39,55 @@ border-radius:5px;margin:10px">Create New</a>
                 City
             </div>
         </div>
-    </div>
-
-    @{
-        var index = 0;
-        @foreach (var item in Model.people)
-        {
-            <partial  name="_Person" model="item"/>
-            index++;
-        }
-    }
+    </div>*@
+    @*Showing Table Data with Partial View Using Razor*@
+    @*@{
+            var index = 0;
+            @foreach (var item in Model.people)
+            {
+                <partial  name="_Person" model="item"/>
+                index++;
+            }
+        }*@
 </div>
+<script src="~/lib/jquery/dist/jquery.js"></script>
+<script>
+    $(document).ready(function () {
+        $("#LoadPeople").click(function () {
+            $('#PersonTable').load("/Person/PeopleIndex");
+        });
+
+        $("#PersonDetails").click(function () {
+            var id = $("#DetailsID").val();
+            $('#PersonTable').load("/Person/PersonDetails", {ID:id});
+        });
+
+        $("#PersonDelete").click(function () {
+            var id = $("#DetailsID").val();
+            $('#PersonTable').load("/Person/Delete", { ID: id });
+            alert("@ViewBag.Message")
+            //var Data = JSON.stringify(id);
+            //$.ajax({
+            //    type: "POST",
+            //    data: Data,
+            //    url: "/Person/Delete",
+            //    dataType: "json",
+            //    contentType: false,
+            //    processData: false,
+
+            //    success: function (response) {
+            //        if (response.success) {
+            //            alert(response.responseText);
+            //        } else {
+            //            // DoSomethingElse()
+            //            alert(response.responseText);
+            //        }
+            //    },
+            //    error: function (response) {
+            //        alert("error") // I'm always get this.
+            //    }
+
+            //});
+        });
+    });
+</script>
