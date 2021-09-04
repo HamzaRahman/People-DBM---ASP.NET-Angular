@@ -61,13 +61,15 @@ namespace MVCBasics.Controllers
 
         ///////////////////////// ACTIONS for AJAX
         ///
-        public IActionResult PeopleIndex(PeopleViewModel search)
+        public IActionResult PeopleIndex(string search)
         {
-            if (string.IsNullOrEmpty(search.SearchPhrase))
+            PeopleViewModel PVM = new PeopleViewModel();
+            PVM.SearchPhrase = search;
+            if (string.IsNullOrEmpty(PVM.SearchPhrase))
             {
                 return PartialView("_PeopleIndex", ps.All());
             }
-            return PartialView("_PeopleIndex", ps.FindBy(search));
+            return PartialView("_PeopleIndex", ps.FindBy(PVM));
         }
         public IActionResult PersonDetails(int ID)
         {
