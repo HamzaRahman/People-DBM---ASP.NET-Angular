@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace MVCBasics.Repository
 {
-    interface IPeopleRepo
+    public interface IPeopleRepo
     {
         Person Create(string Name, int PhoneNumber, string City);
         List<Person> Read();

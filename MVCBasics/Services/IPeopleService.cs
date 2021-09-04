@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace MVCBasics.Services
 {
-    interface IPeopleService
+    public interface IPeopleService
     {
         Person Add(CreatePersonViewModel person);
         PeopleViewModel All();

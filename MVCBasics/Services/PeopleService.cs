@@ -7,7 +7,13 @@ namespace MVCBasics.Services
 {
     public class PeopleService : IPeopleService
     {
-        InMemoryPeopleRepo PeopleDatabase = new InMemoryPeopleRepo();
+        //Constructor Injection--Fetching IPeopleRepo Object from Startup ConfigureServices
+        IPeopleRepo PeopleDatabase;
+        public PeopleService(IPeopleRepo _PeopleDatabase)
+        {
+            PeopleDatabase = _PeopleDatabase;
+        }
+
         public Person Add(CreatePersonViewModel person)
         {
             PeopleDatabase.Create(person.Name, person.PhoneNumber, person.city);

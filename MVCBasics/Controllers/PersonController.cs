@@ -11,7 +11,12 @@ namespace MVCBasics.Controllers
 {
     public class PersonController : Controller
     {
-        PeopleService ps = new PeopleService();
+        //Constructor Injection--Fetching IPeopleService Object from Startup ConfigureServices
+        IPeopleService ps;
+        public PersonController(IPeopleService _ps)
+        {
+            ps = _ps;
+        }
         public IActionResult Index(PeopleViewModel search)
         {
             if (string.IsNullOrEmpty(search.SearchPhrase))
