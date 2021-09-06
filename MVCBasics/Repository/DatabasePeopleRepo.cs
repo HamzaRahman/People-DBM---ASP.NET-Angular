@@ -29,6 +29,7 @@ namespace MVCBasics.Repository
             if(_DB.People.Contains(person))
             {
                 _DB.People.Remove(person);
+                _DB.SaveChanges();
                 return true;
             }
             return false;
