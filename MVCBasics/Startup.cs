@@ -1,6 +1,7 @@
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -23,9 +24,10 @@ namespace MVCBasics
         public void ConfigureServices(IServiceCollection services)
         {
             //Dependency Injections or Singleton Objects
+            services.AddSingleton<PeopleContext>();
             services.AddSingleton<IPeopleService, PeopleService>();
-            services.AddSingleton<IPeopleRepo, InMemoryPeopleRepo>();
-
+            services.AddSingleton<IPeopleRepo, DatabasePeopleRepo>();
+            
             services.AddControllersWithViews();
         }
 
