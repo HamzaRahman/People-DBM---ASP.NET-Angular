@@ -9,7 +9,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace MVCBasics.Migrations
 {
     [DbContext(typeof(PeopleContext))]
-    [Migration("20210906231031_PeopleDB")]
+    [Migration("20210909041917_PeopleDB")]
     partial class PeopleDB
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)

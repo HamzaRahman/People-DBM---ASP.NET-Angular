@@ -15,7 +15,14 @@ namespace MVCBasics.Repository
         }
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseSqlServer(@"Server=.\SQLEXPRESS;Database=PeopleDB;Trusted_Connection=True;");
+            ///<summary>
+            ///Use Below Connection For Remote Database
+            ///</summary>
+            //optionsBuilder.UseSqlServer(@"Server=.\SQLEXPRESS;Database=PeopleDB;Trusted_Connection=True;");
+            ///<summary>
+            ///Use Below Connection For Local Database
+            ///</summary>
+            optionsBuilder.UseSqlServer("Server=(localdb)\\mssqllocaldb;Database=aspnet-MVCBasics;Trusted_Connection=True;MultipleActiveResultSets=true");
         }
         public DbSet<Person> People { get; set; }
     }
