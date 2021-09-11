@@ -16,7 +16,7 @@ namespace MVCBasics.Services
 
         public Person Add(CreatePersonViewModel person)
         {
-            PeopleDatabase.Create(person.Name, person.PhoneNumber, person.city);
+            PeopleDatabase.Create(person.Name, person.PhoneNumber, person.City);
             return person.Model;
         }
         PeopleViewModel pvm = new PeopleViewModel();
@@ -39,7 +39,7 @@ namespace MVCBasics.Services
             pvm.people = people.Where(person => parameters.Any(param =>
                 person.Name.Contains(param) ||
                 person.PhoneNumber.ToString().Contains(param) ||
-                person.city.Contains(param)
+                person.City.Name.Contains(param)
                 )).ToList();
             return pvm;
         }

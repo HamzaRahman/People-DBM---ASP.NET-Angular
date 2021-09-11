@@ -25,5 +25,7 @@ namespace MVCBasics.Repository
             optionsBuilder.UseSqlServer("Server=(localdb)\\mssqllocaldb;Database=aspnet-MVCBasics;Trusted_Connection=True;MultipleActiveResultSets=true");
         }
         public DbSet<Person> People { get; set; }
+        public DbSet<City> City { get; set; }
+        public DbSet<Country> Country { get; set; }
     }
 }

@@ -64,16 +64,15 @@ namespace MVCBasics.Models
             }
         }
         [Required]
-        [DataType(DataType.Text)]
-        public string city
+        public City City
         {
             get
             {
-                return Model.city;
+                return Model.City;
             }
             set
             {
-                Model.city = value;
+                Model.City = value;
             }
         }
     }

@@ -6,12 +6,11 @@ using System.Threading.Tasks;
 
 namespace MVCBasics.Models
 {
-    public class City
+    public class Country
     {
         [Key]
         public int ID { get; set; }
         public string Name { get; set; }
-        public Country Country { get; set; }
-        public List<Person> People { get; set; } = new List<Person>();
+        public List<City> City { get; set; } = new List<City>();
     }
 }

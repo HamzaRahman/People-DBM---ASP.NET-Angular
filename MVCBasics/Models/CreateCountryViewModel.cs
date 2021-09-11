@@ -6,15 +6,14 @@ using System.Threading.Tasks;
 
 namespace MVCBasics.Models
 {
-    public class CreateCityViewModel
+    public class CreateCountryViewModel
     {
-        public CreateCityViewModel()
+        public CreateCountryViewModel()
         {
-            //Null Error On City Creation
-            //Model = new City();
+            //Model = new Country();
         }
-        //City _Model;
-        public City Model { get; set; } = new City();
+        Country _Model;
+        public Country Model { get; set; } = new Country();
         //{
         //    get
         //    {
@@ -50,26 +49,15 @@ namespace MVCBasics.Models
                 Model.Name = value;
             }
         }
-        public Country Country
+        public List<City> City
         {
             get
             {
-                return Model.Country;
+                return Model.City;
             }
             set
             {
-                Model.Country = value;
-            }
-        }
-        public List<Person> People
-        {
-            get
-            {
-                return Model.People;
-            }
-            set
-            {
-                Model.People = value;
+                Model.City = value;
             }
         }
     }

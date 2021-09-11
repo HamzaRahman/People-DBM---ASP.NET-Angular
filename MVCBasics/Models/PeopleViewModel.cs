@@ -15,5 +15,6 @@ namespace MVCBasics.Models
         }
         public List<Person> people = new List<Person>();
         public string SearchPhrase { get; set; }
+        public CreatePersonViewModel CreatePerson { get; set; }
     }
 }

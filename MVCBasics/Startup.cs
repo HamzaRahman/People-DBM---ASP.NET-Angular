@@ -27,7 +27,11 @@ namespace MVCBasics
             services.AddSingleton<PeopleContext>();
             services.AddSingleton<IPeopleService, PeopleService>();
             services.AddSingleton<IPeopleRepo, DatabasePeopleRepo>();
-            
+            services.AddSingleton<ICityService, CityService>();
+            services.AddSingleton<ICityRepo, DatabaseCityRepo>();
+            services.AddSingleton<ICountryService, CountryService>();
+            services.AddSingleton<ICountryRepo, DatabaseCountryRepo>();
+
             services.AddControllersWithViews();
         }
 

@@ -1,4 +1,5 @@
-﻿using MVCBasics.Models;
+﻿using Microsoft.EntityFrameworkCore;
+using MVCBasics.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,12 +14,13 @@ namespace MVCBasics.Repository
         {
             this._DB = _DB;
         }
-        public Person Create(string Name, int PhoneNumber, string City)
+        public Person Create(string Name, int PhoneNumber, City City)
         {
             Person p = new Person();
             p.Name = Name;
             p.PhoneNumber = PhoneNumber;
-            p.city = City;
+            //p.City = City;
+            _DB.City.FirstOrDefault(c => c.Name == City.Name).People.Add(p);
             _DB.People.Add(p);
             _DB.SaveChanges();
             return p;
@@ -37,12 +39,12 @@ namespace MVCBasics.Repository
 
         public List<Person> Read()
         {
-            return _DB.People.AsParallel().ToList();
+            return _DB.People.Include(people=>people.City).AsParallel().ToList();
         }
 
         public Person Read(int ID)
         {
-            return _DB.People.Where(person => person.ID == ID).FirstOrDefault();
+            return _DB.People.Include(people => people.City).FirstOrDefault(person => person.ID == ID);
         }
 
         public Person Update(Person person)

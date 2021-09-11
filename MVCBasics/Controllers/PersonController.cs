@@ -19,22 +19,26 @@ namespace MVCBasics.Controllers
         }
         public IActionResult Index(PeopleViewModel search)
         {
-            if (string.IsNullOrEmpty(search.SearchPhrase))
-            {
-                return View(ps.All());
-            }
-            return View(ps.FindBy(search));
-        }
-        public IActionResult Create()
-        { 
+            //Use Below Code For Table Data If Not Using AJAX
+            //if (string.IsNullOrEmpty(search.SearchPhrase))
+            //{
+            //    return View(ps.All());
+            //}
+            //return View(ps.FindBy(search));
             return View();
         }
+        //Use Below Method For Separate Create Page
+        //public IActionResult Create()
+        //{ 
+        //    return View();
+        //}
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Create(CreatePersonViewModel m)
+        public IActionResult Create(PeopleViewModel m)
         {
-            ps.Add(m);
-            return View(m);
+            ps.Add(m.CreatePerson);
+            //return View(m);
+            return RedirectToAction("Index");
         }
         public IActionResult Edit(int ID)
         {

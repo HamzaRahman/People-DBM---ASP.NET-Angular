@@ -10,13 +10,13 @@ namespace MVCBasics.Repository
     {
         static List<Person> people = new List<Person>();
         static int IDCounter=0;
-        public Person Create(string Name,int PhoneNumber,string City)
+        public Person Create(string Name,int PhoneNumber,City City)
         {
             Person p = new Person();
             p.ID = ++IDCounter;
             p.Name = Name;
             p.PhoneNumber = PhoneNumber;
-            p.city = City;
+            p.City = City;
             people.Add(p);
             return p;
         }
