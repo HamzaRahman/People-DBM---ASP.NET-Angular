@@ -6,13 +6,11 @@ using System.Threading.Tasks;
 
 namespace MVCBasics.Models
 {
-    public class Person
+    public class Language
     {
         [Key]
         public int ID { get; set; }
         public string Name { get; set; }
-        public int PhoneNumber { get; set; }
-        public City City { get; set; }
-        public List<PersonLanguage> Languages { get; set; } = new List<PersonLanguage>();
+        public List<PersonLanguage> People { get; set; } = new List<PersonLanguage>();
     }
 }

@@ -25,7 +25,15 @@ namespace MVCBasics.Repository
             _DB.SaveChanges();
             return p;
         }
-
+        public PersonLanguage AddToPerson(int languageID, int personID)
+        {
+            PersonLanguage p = new PersonLanguage();
+            p.LanguageID = languageID;
+            p.PersonID = personID;
+            _DB.PersonLanguage.Add(p);
+            _DB.SaveChanges();
+            return p;
+        }
         public bool Delete(Person person)
         {
             if(_DB.People.Contains(person))
@@ -44,7 +52,17 @@ namespace MVCBasics.Repository
 
         public Person Read(int ID)
         {
-            return _DB.People.Include(people => people.City).FirstOrDefault(person => person.ID == ID);
+            var D =  _DB.People.Include(people => people.City).Include(p=>p.Languages).FirstOrDefault(person => person.ID == ID);
+            Person P = new Person();
+            P.Name = D.Name;
+            P.PhoneNumber = D.PhoneNumber;
+            P.City = D.City;
+            foreach (var d in D.Languages)
+            {
+                d.Language = _DB.Language.FirstOrDefault(p => p.ID == d.LanguageID);
+                P.Languages.Add(d);
+            }
+            return P;
         }
 
         public Person Update(Person person)

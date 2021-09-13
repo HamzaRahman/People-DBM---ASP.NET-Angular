@@ -13,6 +13,17 @@ namespace MVCBasics.Repository
         {
 
         }
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<PersonLanguage>()
+                .HasOne(PL => PL.Person)
+                .WithMany(b => b.Languages)
+                .HasForeignKey(bc => bc.PersonID);
+            modelBuilder.Entity<PersonLanguage>()
+                .HasOne(PL => PL.Language)
+                .WithMany(b => b.People)
+                .HasForeignKey(bc => bc.LanguageID);
+        }
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             ///<summary>
@@ -27,5 +38,7 @@ namespace MVCBasics.Repository
         public DbSet<Person> People { get; set; }
         public DbSet<City> City { get; set; }
         public DbSet<Country> Country { get; set; }
+        public DbSet<Language> Language { get; set; }
+        public DbSet<PersonLanguage> PersonLanguage { get; set; }
     }
 }

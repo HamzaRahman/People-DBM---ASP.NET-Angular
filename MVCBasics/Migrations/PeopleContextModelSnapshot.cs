@@ -54,6 +54,21 @@ namespace MVCBasics.Migrations
                     b.ToTable("Country");
                 });
 
+            modelBuilder.Entity("MVCBasics.Models.Language", b =>
+                {
+                    b.Property<int>("ID")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("Name")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("ID");
+
+                    b.ToTable("Language");
+                });
+
             modelBuilder.Entity("MVCBasics.Models.Person", b =>
                 {
                     b.Property<int>("ID")
@@ -77,9 +92,31 @@ namespace MVCBasics.Migrations
                     b.ToTable("People");
                 });
 
+            modelBuilder.Entity("MVCBasics.Models.PersonLanguage", b =>
+                {
+                    b.Property<int>("ID")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int>("LanguageID")
+                        .HasColumnType("int");
+
+                    b.Property<int>("PersonID")
+                        .HasColumnType("int");
+
+                    b.HasKey("ID");
+
+                    b.HasIndex("LanguageID");
+
+                    b.HasIndex("PersonID");
+
+                    b.ToTable("PersonLanguage");
+                });
+
             modelBuilder.Entity("MVCBasics.Models.City", b =>
                 {
-                    b.HasOne("MVCBasics.Models.Country", null)
+                    b.HasOne("MVCBasics.Models.Country", "Country")
                         .WithMany("City")
                         .HasForeignKey("CountryID");
                 });
@@ -89,6 +126,21 @@ namespace MVCBasics.Migrations
                     b.HasOne("MVCBasics.Models.City", "City")
                         .WithMany("People")
                         .HasForeignKey("CityID");
+                });
+
+            modelBuilder.Entity("MVCBasics.Models.PersonLanguage", b =>
+                {
+                    b.HasOne("MVCBasics.Models.Language", "Language")
+                        .WithMany("People")
+                        .HasForeignKey("LanguageID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("MVCBasics.Models.Person", "Person")
+                        .WithMany("Languages")
+                        .HasForeignKey("PersonID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 #pragma warning restore 612, 618
         }

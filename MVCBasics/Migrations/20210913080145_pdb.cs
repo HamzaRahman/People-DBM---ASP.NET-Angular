@@ -2,7 +2,7 @@
 
 namespace MVCBasics.Migrations
 {
-    public partial class PeopleDB : Migration
+    public partial class pdb : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -17,6 +17,19 @@ namespace MVCBasics.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Country", x => x.ID);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Language",
+                columns: table => new
+                {
+                    ID = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Name = table.Column<string>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Language", x => x.ID);
                 });
 
             migrationBuilder.CreateTable(
@@ -60,6 +73,32 @@ namespace MVCBasics.Migrations
                         onDelete: ReferentialAction.Restrict);
                 });
 
+            migrationBuilder.CreateTable(
+                name: "PersonLanguage",
+                columns: table => new
+                {
+                    ID = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    PersonID = table.Column<int>(nullable: false),
+                    LanguageID = table.Column<int>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_PersonLanguage", x => x.ID);
+                    table.ForeignKey(
+                        name: "FK_PersonLanguage_Language_LanguageID",
+                        column: x => x.LanguageID,
+                        principalTable: "Language",
+                        principalColumn: "ID",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_PersonLanguage_People_PersonID",
+                        column: x => x.PersonID,
+                        principalTable: "People",
+                        principalColumn: "ID",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
             migrationBuilder.CreateIndex(
                 name: "IX_City_CountryID",
                 table: "City",
@@ -69,10 +108,26 @@ namespace MVCBasics.Migrations
                 name: "IX_People_CityID",
                 table: "People",
                 column: "CityID");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_PersonLanguage_LanguageID",
+                table: "PersonLanguage",
+                column: "LanguageID");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_PersonLanguage_PersonID",
+                table: "PersonLanguage",
+                column: "PersonID");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
+            migrationBuilder.DropTable(
+                name: "PersonLanguage");
+
+            migrationBuilder.DropTable(
+                name: "Language");
+
             migrationBuilder.DropTable(
                 name: "People");
 

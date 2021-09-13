@@ -19,6 +19,10 @@ namespace MVCBasics.Services
             PeopleDatabase.Create(person.Name, person.PhoneNumber, person.City);
             return person.Model;
         }
+        public PersonLanguage AddToPerson(int LID, int PID)
+        {
+            return PeopleDatabase.AddToPerson(LID, PID);
+        }
         PeopleViewModel pvm = new PeopleViewModel();
         public PeopleViewModel All()
         {

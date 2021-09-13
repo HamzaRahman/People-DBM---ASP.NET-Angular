@@ -1,4 +1,4 @@
-﻿@model MVCBasics.Models.CountryViewModel
+﻿@model MVCBasics.Models.LanguageViewModel
 <div id="CityTable" class="table" style="background: skyblue; float: right; clear: both;">
     <div>
         <hr />
@@ -13,9 +13,9 @@
     </div>
     @*Showing Table Data with Partial View Using Razor*@
     @{
-        @foreach (var item in Model.Countries)
+        @foreach (var item in Model.Languages)
         {
-            <partial name="_CountryPartial" model="item" />
+            <partial name="_LanguagePartial" model="item" />
         }
     }
 </div>

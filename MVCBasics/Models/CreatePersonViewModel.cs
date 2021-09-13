@@ -75,5 +75,16 @@ namespace MVCBasics.Models
                 Model.City = value;
             }
         }
+        public List<PersonLanguage> Languages
+        {
+            get
+            {
+                return Model.Languages;
+            }
+            set
+            {
+                Model.Languages = value;
+            }
+        }
     }
 }

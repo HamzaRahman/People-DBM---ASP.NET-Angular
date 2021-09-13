@@ -13,12 +13,12 @@
     <label class="control-label" style="float:right;">Search By Anything</label>
 </form>-->
 
-<a asp-action="Create"
+@*<a asp-action="Create"
    style="float:right;
 clear:both; background:skyblue;
 display:block;
 text-decoration:none;
-border-radius:5px;margin:10px">Create New</a>
+border-radius:5px;margin:10px">Create New</a>*@
 
 <input type="text" id="DetailsID" />
 <input type="button" value="People" id="LoadPeople" />
@@ -48,7 +48,7 @@ border-radius:5px;margin:10px">Create New</a>
         </div>
         <div class="col-md-4">
             <div class="form-group">
-                <label  class="control-label">City</label>
+                <label class="control-label">City</label>
                 <input asp-for="CreatePerson.City.Name" class="form-control" />
                 <span asp-validation-for="CreatePerson.City.Name" class="text-danger"></span>
             </div>
@@ -61,6 +61,7 @@ border-radius:5px;margin:10px">Create New</a>
 
     </div>
 </form>
+
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
 }
@@ -92,8 +93,11 @@ border-radius:5px;margin:10px">Create New</a>
             }
         }*@
 </div>
-<script src="~/lib/jquery/dist/jquery.js"></script>
-<script>
+<input id='AddLanguageBT' type='button' value='Add' class="btn btn-primary" style='float: left; clear: both;' />
+<input id='LanguageID' class='form-control' style='float: left; width: 20%;' />
+<p style="float: left; ">Enter A Language's ID To Add That Language With This Person</p>
+    <script src="~/lib/jquery/dist/jquery.js"></script>
+    <script>
     $(document).ready(function () {
         $("#LoadPeople").click(function () {
             $('#PersonTable').load("/Person/PeopleIndex");
@@ -106,9 +110,16 @@ border-radius:5px;margin:10px">Create New</a>
 
         $("#PersonDetails").click(function () {
             var id = $("#DetailsID").val();
-            $('#PersonTable').load("/Person/PersonDetails", {ID:id});
+            $('#PersonTable').load("/Person/PersonDetails", { ID: id });
+            //$('#LT').append("<input id='AddLanguageBT' type='button' value='Add' class='btn btn - primary' style='float: left; clear: both;background:skyblue' />")
+            //$('#LT').append("<input id='PersonID' class='form-control' style='float: left; width: 20%;' />")
+            //$('#LT').append("Enter A Language's ID To Add That Language With This Person")
         });
-
+        $("#AddLanguageBT").click(function () {
+            var pid = $("#DetailsID").val();
+            var lid = $("#LanguageID").val();
+            $.get("/Person/AddToPerson", { LID: lid, PID: pid });
+        });
         $("#PersonDelete").click(function () {
             var id = $("#DetailsID").val();
             $('#PersonTable').load("/Person/Delete", { ID: id });
@@ -137,4 +148,4 @@ border-radius:5px;margin:10px">Create New</a>
             //});
         });
     });
-</script>
+    </script>

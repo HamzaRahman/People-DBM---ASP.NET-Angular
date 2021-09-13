@@ -6,13 +6,13 @@ using System.Threading.Tasks;
 
 namespace MVCBasics.Repository
 {
-    public interface IPeopleRepo
+    public interface ILanguageRepo
     {
-        Person Create(string Name, int PhoneNumber, City City);
+        Language Create(string Name);
         PersonLanguage AddToPerson(int language, int person);
-        List<Person> Read();
-        Person Read(int ID);
-        Person Update(Person person);
-        bool Delete(Person person);
+        List<Language> Read();
+        Language Read(int ID);
+        Language Update(Language language);
+        bool Delete(Language language);
     }
 }

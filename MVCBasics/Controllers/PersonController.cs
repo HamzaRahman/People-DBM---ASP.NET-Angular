@@ -27,6 +27,11 @@ namespace MVCBasics.Controllers
             //return View(ps.FindBy(search));
             return View();
         }
+        public IActionResult AddToPerson(int LID, int PID)
+        {
+            ps.AddToPerson(LID, PID);
+            return RedirectToAction("Index");
+        }
         //Use Below Method For Separate Create Page
         //public IActionResult Create()
         //{ 

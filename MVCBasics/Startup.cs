@@ -31,6 +31,8 @@ namespace MVCBasics
             services.AddSingleton<ICityRepo, DatabaseCityRepo>();
             services.AddSingleton<ICountryService, CountryService>();
             services.AddSingleton<ICountryRepo, DatabaseCountryRepo>();
+            services.AddSingleton<ILanguageService, LanguageService>();
+            services.AddSingleton<ILanguageRepo, DatabaseLanguageRepo>();
 
             services.AddControllersWithViews();
         }

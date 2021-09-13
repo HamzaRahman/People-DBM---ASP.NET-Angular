@@ -1,7 +1,7 @@
-﻿@model MVCBasics.Models.CreateCountryViewModel
+﻿@model MVCBasics.Models.CreateLanguageViewModel
 
 <div>
-    <h4>City Details</h4>
+    <h4>Language Details</h4>
     <hr />
     <dl class="row">
         <dt class="col-sm-2">
@@ -11,7 +11,7 @@
             @Html.DisplayFor(model => model.Name)
         </dd>
     </dl>
-    <h4>Cities In This Country</h4>
+    <h4>People Speaking This Language</h4>
     <div id="PersonTable" class="table">
         <div>
             <hr />
@@ -22,13 +22,21 @@
                 <div class="col-sm-2">
                     Name
                 </div>
+                <div class="col-sm-2">
+                    PhoneNumber
+                </div>
+                <div class="col-sm-2">
+                    City
+                </div>
             </div>
         </div>
         @*Showing Table Data with Partial View Using Razor*@
         @{
-            @foreach (var item in Model.City)
+            var index = 0;
+            @foreach (var item in Model.People)
             {
-                <partial name="_CityPartial" model="item" />
+                <partial name="_Person" model="item.Person" />
+                index++;
             }
         }
     </div>
