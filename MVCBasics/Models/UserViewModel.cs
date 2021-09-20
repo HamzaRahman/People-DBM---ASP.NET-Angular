@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace MVCBasics.Models
 {
-    public class RegisterViewModel
+    public class UserViewModel
     {
         [Required(ErrorMessage ="Email Is Required")]
         public string Email { get; set; }

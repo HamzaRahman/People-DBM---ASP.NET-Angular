@@ -23,7 +23,7 @@ namespace MVCBasics.Controllers
             return View();
         }
         [HttpPost]
-        public async Task<IActionResult> Register(RegisterViewModel model)
+        public async Task<IActionResult> Register(UserViewModel model)
         {
             if (ModelState.IsValid)
             {
@@ -40,6 +40,11 @@ namespace MVCBasics.Controllers
                 }
             }
             return View();
+        }
+        public async Task<IActionResult> Logout()
+        {
+            await signInManager.SignOutAsync();
+            return RedirectToAction("Index", "Home");
         }
     }
 }
