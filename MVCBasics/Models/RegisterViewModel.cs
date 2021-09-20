@@ -6,8 +6,14 @@ using System.Threading.Tasks;
 
 namespace MVCBasics.Models
 {
-    public class UserViewModel
+    public class RegisterViewModel
     {
+        [Required(ErrorMessage = "First Name Is Required")]
+        public string FirstName { get; set; }
+        [Required(ErrorMessage = "Last Name Is Required")]
+        public string LastName { get; set; }
+        [Required(ErrorMessage = "Birth Date Is Required")]
+        public DateTime BirthDate { get; set; }
         [Required(ErrorMessage ="Email Is Required")]
         public string Email { get; set; }
         [Required]
@@ -17,5 +23,6 @@ namespace MVCBasics.Models
         [DataType(DataType.Password)]
         [Compare(nameof(Password),ErrorMessage ="Password Do Not Match")]
         public string ConfirmPassword { get; set; }
+        public bool RememberMe { get; set; }
     }
 }

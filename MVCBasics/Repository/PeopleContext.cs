@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace MVCBasics.Repository
 {
-    public class PeopleContext:IdentityDbContext
+    public class PeopleContext:IdentityDbContext<User>
     {
         public PeopleContext():base()
         {

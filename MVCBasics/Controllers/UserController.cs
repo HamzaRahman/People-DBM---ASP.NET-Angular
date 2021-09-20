@@ -10,10 +10,10 @@ namespace MVCBasics.Controllers
 {
     public class UserController : Controller
     {
-        private readonly UserManager<IdentityUser> userManager;
-        private readonly SignInManager<IdentityUser> signInManager;
+        private readonly UserManager<User> userManager;
+        private readonly SignInManager<User> signInManager;
 
-        public UserController(UserManager<IdentityUser> userManager,SignInManager<IdentityUser> signInManager)
+        public UserController(UserManager<User> userManager,SignInManager<User> signInManager)
         {
             this.userManager = userManager;
             this.signInManager = signInManager;
@@ -23,11 +23,15 @@ namespace MVCBasics.Controllers
             return View();
         }
         [HttpPost]
-        public async Task<IActionResult> Register(UserViewModel model)
+        public async Task<IActionResult> Register(RegisterViewModel model)
         {
             if (ModelState.IsValid)
             {
-                var user = new IdentityUser{UserName=model.Email, Email = model.Email };
+                var user = new User{UserName=model.FirstName+model.LastName,
+                    Email = model.Email,
+                    FirstName = model.FirstName,
+                    LastName=model.LastName,
+                    BirthDate=model.BirthDate};
                 var result = await userManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {
@@ -45,6 +49,24 @@ namespace MVCBasics.Controllers
         {
             await signInManager.SignOutAsync();
             return RedirectToAction("Index", "Home");
+        }
+        public IActionResult Login()
+        {
+            return View();
+        }
+        [HttpPost]
+        public async Task<IActionResult> Login(LoginViewModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                var result = await signInManager.PasswordSignInAsync(model.UserName, model.Password,model.RememberMe,false);
+                if (result.Succeeded)
+                {
+                    return RedirectToAction("Index", "Person");
+                }
+                ModelState.AddModelError("", "Unable To Login "+result.ToString());
+            }
+            return View();
         }
     }
 }

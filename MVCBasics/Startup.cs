@@ -1,11 +1,13 @@
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using MVCBasics.Models;
 using MVCBasics.Repository;
 using MVCBasics.Services;
 using Newtonsoft.Json.Serialization;
@@ -35,9 +37,10 @@ namespace MVCBasics
             services.AddSingleton<ILanguageService, LanguageService>();
             services.AddSingleton<ILanguageRepo, DatabaseLanguageRepo>();
 
-            services.AddIdentity<IdentityUser,IdentityRole>(options => options.SignIn.RequireConfirmedAccount = true)
+            services.AddIdentity<User,IdentityRole>(options=> { })
                 .AddEntityFrameworkStores<PeopleContext>();
 
+            services.ConfigureApplicationCookie(options => options.LoginPath = new PathString("/User/Login"));
             services.AddControllersWithViews();
         }
 
