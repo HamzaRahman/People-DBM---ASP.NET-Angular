@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore;
 using MVCBasics.Models;
 using System;
 using System.Collections.Generic;
@@ -7,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace MVCBasics.Repository
 {
-    public class PeopleContext:DbContext
+    public class PeopleContext:IdentityDbContext
     {
         public PeopleContext():base()
         {
@@ -15,6 +16,7 @@ namespace MVCBasics.Repository
         }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            base.OnModelCreating(modelBuilder);
             modelBuilder.Entity<PersonLanguage>()
                 .HasOne(PL => PL.Person)
                 .WithMany(b => b.Languages)

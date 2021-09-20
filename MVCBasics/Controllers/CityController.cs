@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using MVCBasics.Models;
 using MVCBasics.Services;
 
@@ -11,6 +12,7 @@ namespace MVCBasics.Controllers
         {
             CS = _CS;
         }
+        [Authorize]
         public IActionResult Index()
         {
             return View();
