@@ -1,19 +1,26 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using MVCBasics.Models;
 using MVCBasics.Services;
 
 namespace MVCBasics.Controllers
 {
+    [Authorize]
     public class LanguageController : Controller
     {
         ILanguageService LS;
-        public LanguageController(ILanguageService _LS)
+        private readonly IPeopleService ps;
+
+        public LanguageController(ILanguageService _LS, IPeopleService _ps)
         {
             LS = _LS;
+            ps = _ps;
         }
         public IActionResult Index()
         {
-            return View();
+            LanguageViewModel LVM = new LanguageViewModel();
+            LVM.AllPeople = ps.All().people;
+            return View(LVM);
         }
         [HttpPost]
         [ValidateAntiForgeryToken]
@@ -23,9 +30,9 @@ namespace MVCBasics.Controllers
             //return View(m);
             return RedirectToAction("Index");
         }
-        public IActionResult AddToPerson(int LID,int PID)
+        public IActionResult AddToPerson(int LID,string PersonName)
         {
-            LS.AddToPerson(LID, PID);
+            LS.AddToPerson(LID, PersonName);
             return RedirectToAction("Index");
         }
         public IActionResult LanguageIndex(string search)

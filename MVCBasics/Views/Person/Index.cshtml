@@ -49,9 +49,10 @@ border-radius:5px;margin:10px">Create New</a>*@
         <div class="col-md-4">
             <div class="form-group">
                 <label class="control-label">City</label>
-                <input asp-for="CreatePerson.City.Name" class="form-control" />
+                <select asp-items="@(new SelectList(Model.AllCities))" asp-for="@Model.CreatePerson.City.Name" class="form-control"><option>Select</option></select>
                 <span asp-validation-for="CreatePerson.City.Name" class="text-danger"></span>
             </div>
+            
         </div>
         <div class="col-md-4">
             <div class="form-group">
@@ -94,8 +95,9 @@ border-radius:5px;margin:10px">Create New</a>*@
         }*@
 </div>
 <input id='AddLanguageBT' type='button' value='Add' class="btn btn-primary" style='float: left; clear: both;' />
-<input id='LanguageID' class='form-control' style='float: left; width: 20%;' />
-<p style="float: left; ">Enter A Language's ID To Add That Language With This Person</p>
+<select id='LanguageID' style='float: left; width: 20%;' asp-items="@(new SelectList(Model.AllLanguages))" class="form-control"><option>Select</option></select>
+@*<input id='LanguageID' class='form-control' style='float: left; width: 20%;' />*@
+<p style="float: left; ">Add A Language To A Person</p>
     <script src="~/lib/jquery/dist/jquery.js"></script>
     <script>
     $(document).ready(function () {

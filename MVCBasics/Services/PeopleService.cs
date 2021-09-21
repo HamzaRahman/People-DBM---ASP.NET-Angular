@@ -9,9 +9,12 @@ namespace MVCBasics.Services
     {
         //Constructor Injection--Fetching IPeopleRepo Object from Startup ConfigureServices
         IPeopleRepo PeopleDatabase;
-        public PeopleService(IPeopleRepo _PeopleDatabase)
+        private readonly ILanguageRepo LanguageDatabase;
+
+        public PeopleService(IPeopleRepo _PeopleDatabase,ILanguageRepo LanguageDatabase)
         {
             PeopleDatabase = _PeopleDatabase;
+            this.LanguageDatabase = LanguageDatabase;
         }
 
         public Person Add(CreatePersonViewModel person)
@@ -19,9 +22,11 @@ namespace MVCBasics.Services
             PeopleDatabase.Create(person.Name, person.PhoneNumber, person.City);
             return person.Model;
         }
-        public PersonLanguage AddToPerson(int LID, int PID)
+        public PersonLanguage AddToPerson(string LID, int PID)
         {
-            return PeopleDatabase.AddToPerson(LID, PID);
+            var AllL = LanguageDatabase.Read();
+            var Language = AllL.FirstOrDefault(lang => lang.Name == LID);
+            return PeopleDatabase.AddToPerson(Language, PID);
         }
         PeopleViewModel pvm = new PeopleViewModel();
         public PeopleViewModel All()

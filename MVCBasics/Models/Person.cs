@@ -14,5 +14,9 @@ namespace MVCBasics.Models
         public int PhoneNumber { get; set; }
         public City City { get; set; }
         public List<PersonLanguage> Languages { get; set; } = new List<PersonLanguage>();
+        public override string ToString()
+        {
+            return Name;
+        }
     }
 }

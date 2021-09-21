@@ -10,17 +10,22 @@ namespace MVCBasics.Services
     public class LanguageService : ILanguageService
     {
         ILanguageRepo LanguageDatabase;
-        public LanguageService(ILanguageRepo _LanguageDatabase)
+        private readonly IPeopleRepo PeopleDatabase;
+
+        public LanguageService(ILanguageRepo _LanguageDatabase,IPeopleRepo PeopleDatabase)
         {
             LanguageDatabase = _LanguageDatabase;
+            this.PeopleDatabase = PeopleDatabase;
         }
         public Language Add(CreateLanguageViewModel language)
         {
             return LanguageDatabase.Create(language.Name);
         }
-        public PersonLanguage AddToPerson(int LID,int PID)
+        public PersonLanguage AddToPerson(int LID,string PersonName)
         {
-            return LanguageDatabase.AddToPerson(LID, PID);
+            var AllPeople = PeopleDatabase.Read();
+            var person = AllPeople.FirstOrDefault(per => per.Name == PersonName);
+            return LanguageDatabase.AddToPerson(LID, person);
         }
         LanguageViewModel LVM = new LanguageViewModel();
         public LanguageViewModel All()

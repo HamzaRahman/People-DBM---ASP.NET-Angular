@@ -11,7 +11,7 @@ namespace MVCBasics.Repository
         static List<Person> people = new List<Person>();
         static int IDCounter=0;
 
-        public PersonLanguage AddToPerson(int language, int person)
+        public PersonLanguage AddToPerson(Language language, int person)
         {
             throw new NotImplementedException();
         }

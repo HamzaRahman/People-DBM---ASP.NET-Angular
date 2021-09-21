@@ -9,7 +9,7 @@ namespace MVCBasics.Repository
     public interface ILanguageRepo
     {
         Language Create(string Name);
-        PersonLanguage AddToPerson(int language, int person);
+        PersonLanguage AddToPerson(int language, Person person);
         List<Language> Read();
         Language Read(int ID);
         Language Update(Language language);

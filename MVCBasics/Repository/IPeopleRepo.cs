@@ -9,7 +9,7 @@ namespace MVCBasics.Repository
     public interface IPeopleRepo
     {
         Person Create(string Name, int PhoneNumber, City City);
-        PersonLanguage AddToPerson(int language, int person);
+        PersonLanguage AddToPerson(Language language, int person);
         List<Person> Read();
         Person Read(int ID);
         Person Update(Person person);

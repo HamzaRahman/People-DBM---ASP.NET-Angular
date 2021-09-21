@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using MVCBasics.Models;
 using MVCBasics.Services;
 using System;
@@ -9,13 +10,23 @@ using System.Threading.Tasks;
 
 namespace MVCBasics.Controllers
 {
+    [Authorize]
     public class PersonController : Controller
     {
         //Constructor Injection--Fetching IPeopleService Object from Startup ConfigureServices
         IPeopleService ps;
-        public PersonController(IPeopleService _ps)
+        private readonly ICityService CS;
+        private readonly ILanguageService lS;
+        private City SelectedCity = new City();
+        public PersonController(IPeopleService _ps,ICityService _CS,ILanguageService LS)
         {
             ps = _ps;
+            CS = _CS;
+            lS = LS;
+        }
+        public void AddSelectedCity(int ID)
+        {
+            SelectedCity = CS.FindBy(ID);
         }
         public IActionResult Index(PeopleViewModel search)
         {
@@ -25,9 +36,12 @@ namespace MVCBasics.Controllers
             //    return View(ps.All());
             //}
             //return View(ps.FindBy(search));
-            return View();
+            PeopleViewModel PV = new PeopleViewModel();
+            PV.AllCities = CS.All().Cities;
+            PV.AllLanguages = lS.All().Languages;
+            return View(PV);
         }
-        public IActionResult AddToPerson(int LID, int PID)
+        public IActionResult AddToPerson(string LID, int PID)
         {
             ps.AddToPerson(LID, PID);
             return RedirectToAction("Index");
@@ -48,7 +62,7 @@ namespace MVCBasics.Controllers
         public IActionResult Edit(int ID)
         {
             CreatePersonViewModel CVPM = new CreatePersonViewModel();
-            CVPM.Model = ps.FindBy(ID); 
+            CVPM.Model = ps.FindBy(ID);
             return View(CVPM);
         }
         [HttpPost]

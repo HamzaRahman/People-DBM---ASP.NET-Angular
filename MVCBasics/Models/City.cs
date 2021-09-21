@@ -13,5 +13,9 @@ namespace MVCBasics.Models
         public string Name { get; set; }
         public Country Country { get; set; }
         public List<Person> People { get; set; } = new List<Person>();
+        public override string ToString()
+        {
+            return Name;
+        }
     }
 }

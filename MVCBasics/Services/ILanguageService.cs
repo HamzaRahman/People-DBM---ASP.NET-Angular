@@ -9,7 +9,7 @@ namespace MVCBasics.Services
     public interface ILanguageService
     {
         Language Add(CreateLanguageViewModel language);
-        PersonLanguage AddToPerson(int LID, int PID);
+        PersonLanguage AddToPerson(int LID, string PersonName);
         LanguageViewModel All();
         LanguageViewModel FindBy(LanguageViewModel Search);
         Language FindBy(int ID);

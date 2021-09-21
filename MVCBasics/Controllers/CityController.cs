@@ -8,14 +8,19 @@ namespace MVCBasics.Controllers
     public class CityController : Controller
     {
         ICityService CS;
-        public CityController(ICityService _CS)
+        private readonly ICountryService cos;
+
+        public CityController(ICityService _CS,ICountryService Cos)
         {
             CS = _CS;
+            cos = Cos;
         }
         [Authorize]
         public IActionResult Index()
         {
-            return View();
+            CityViewModel CVM = new CityViewModel();
+            CVM.Countries = cos.All().Countries;
+            return View(CVM);
         }
         [HttpPost]
         [ValidateAntiForgeryToken]

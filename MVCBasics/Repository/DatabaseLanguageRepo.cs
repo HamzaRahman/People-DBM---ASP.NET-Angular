@@ -22,11 +22,11 @@ namespace MVCBasics.Repository
             _DB.SaveChanges();
             return L;
         }
-        public PersonLanguage AddToPerson(int languageID,int personID)
+        public PersonLanguage AddToPerson(int languageID,Person person)
         {
             PersonLanguage p = new PersonLanguage();
             p.LanguageID = languageID;
-            p.PersonID = personID;
+            p.PersonID = person.ID;
             _DB.PersonLanguage.Add(p);
             _DB.SaveChanges();
             return p;

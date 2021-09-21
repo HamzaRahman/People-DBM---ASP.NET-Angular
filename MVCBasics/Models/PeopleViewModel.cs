@@ -14,6 +14,8 @@ namespace MVCBasics.Models
             
         }
         public List<Person> people = new List<Person>();
+        public List<City> AllCities { get; set; } = new List<City>();
+        public List<Language> AllLanguages { get; set; } = new List<Language>();
         public string SearchPhrase { get; set; }
         public CreatePersonViewModel CreatePerson { get; set; }
     }

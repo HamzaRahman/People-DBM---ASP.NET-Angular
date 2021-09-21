@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using MVCBasics.Models;
 using MVCBasics.Services;
 using System;
@@ -8,6 +9,7 @@ using System.Threading.Tasks;
 
 namespace MVCBasics.Controllers
 {
+    [Authorize]
     public class CountryController : Controller
     {
         ICountryService CS;

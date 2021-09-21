@@ -12,5 +12,9 @@ namespace MVCBasics.Models
         public int ID { get; set; }
         public string Name { get; set; }
         public List<PersonLanguage> People { get; set; } = new List<PersonLanguage>();
+        public override string ToString()
+        {
+            return Name;
+        }
     }
 }
