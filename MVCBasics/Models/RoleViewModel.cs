@@ -10,5 +10,6 @@ namespace MVCBasics.Models
     {
         public CreateRoleViewModel CreateRoleViewModel { get; set; }
         public List<IdentityRole> Roles { get; set; }
+        public List<User> AllUsers { get; set; } = new List<User>();
     }
 }

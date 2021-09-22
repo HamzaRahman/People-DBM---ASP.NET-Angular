@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace MVCBasics.Controllers
 {
-    [Authorize]
+    [Authorize(Roles = "Admin")]
     public class CountryController : Controller
     {
         ICountryService CS;

@@ -1,34 +1,66 @@
-﻿@model IEnumerable<IdentityRole>
+﻿@model MVCBasics.Models.RoleViewModel
 @{
     ViewData["Title"] = "Roles";
 }
-<h1>All Roles</h1>
-<div>
-    <hr />
-    <div class="row">
-        <div class="col-sm-2">
-            ID
-        </div>
-        <div class="col-sm-2">
-            Name
-        </div>
+<label >Search By Name</label>
+<input type="text" id="DetailsID" />
+<input type="button" value="Roles" id="LoadRoles" />
+<input type="button" value="Details" id="RoleDetails" />
+<input type="button" value="Delete" id="RoleDelete" />
+
+<label class="control-label" style="float:right;">Search By Anything</label>
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Create">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="CreateRoleViewModel.Name" class="control-label"></label>
+                <input asp-for="CreateRoleViewModel.Name" class="form-control" />
+                <span asp-validation-for="CreateRoleViewModel.Name" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
     </div>
 </div>
-@foreach (var role in Model)
-{
-    <div>
-        <hr />
-        <div class="row">
-            <div class="col-sm-2">
-                @role.Id
-            </div>
-            <div class="col-sm-2">
-                @role.Name
-            </div>
-            <div class="col-sm-1">
-                *@Html.ActionLink("Edit", "Edit", new { id = role.Id })
-            </div>
-        </div>
-    </div>
-}
-<a class="btn btn-primary" asp-controller="Role" asp-action="Create">Create</a>
+
+<h1>All Roles</h1>
+<div id="RoleTable">
+    
+</div>
+
+
+<input id='AddUserBT' type='button' value='Add' class="btn btn-primary" style='float: left; clear: both;' />
+<select id='UserID' style='float: left; width: 20%;' asp-items="@(new SelectList(Model.AllUsers))" class="form-control"><option>Select</option></select>
+
+<script src="~/lib/jquery/dist/jquery.js"></script>
+<script>
+    $(document).ready(function () {
+        $("#LoadRoles").click(function () {
+            $('#RoleTable').load("/Role/RoleIndex");
+        });
+
+        $("#SearchBt").click(function () {
+            var sc = $("#search").val();
+            $('#PersonTable').load("/Person/PeopleIndex", { search: sc });
+        });
+
+        $("#RoleDetails").click(function () {
+            var id = $("#DetailsID").val();
+            $('#RoleTable').load("/Role/RoleDetails", { RoleName: id });
+        });
+
+        $("#AddUserBT").click(function () {
+            var RoleName = $("#DetailsID").val();
+            var UserName = $("#UserID").val();
+            $.get("/Role/AddUserToRole", { RoleName: RoleName, UserName: UserName });
+        });
+
+        $("#RoleDelete").click(function () {
+            var id = $("#DetailsID").val();
+            $.get("/Role/Delete", { RoleName: id });
+            alert("@ViewBag.Message")
+        });
+    });
+</script>

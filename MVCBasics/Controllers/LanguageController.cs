@@ -5,7 +5,7 @@ using MVCBasics.Services;
 
 namespace MVCBasics.Controllers
 {
-    [Authorize]
+    [Authorize(Roles = "Admin")]
     public class LanguageController : Controller
     {
         ILanguageService LS;

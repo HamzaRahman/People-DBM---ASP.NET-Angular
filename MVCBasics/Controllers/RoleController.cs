@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace MVCBasics.Controllers
 {
-    [Authorize]
+    [Authorize(Roles = "Admin")]
     public class RoleController : Controller
     {
         private readonly RoleManager<IdentityRole> roleManager;
@@ -22,27 +22,38 @@ namespace MVCBasics.Controllers
         }
         public IActionResult Index()
         {
-            var Roles = roleManager.Roles.ToList();
-            return View(Roles);
+            RoleViewModel RVM = new RoleViewModel();
+            RVM.Roles = roleManager.Roles.ToList();
+            RVM.AllUsers = userManager.Users.ToList();
+            return View(RVM);
         }
-        public IActionResult Create() { return View(); }
-        [HttpPost]
-        public async Task<IActionResult> Create(CreateRoleViewModel Model)
+        public IActionResult RoleIndex()
         {
-            if (ModelState.IsValid)
+            RoleViewModel RVM = new RoleViewModel();
+            RVM.Roles = roleManager.Roles.ToList();
+            RVM.AllUsers = userManager.Users.ToList();
+            return PartialView("_RoleListPartial",RVM);
+        }
+        public async Task<IActionResult> AddUserToRole(string RoleName, string UserName) 
+        {
+            //var role = await roleManager.FindByNameAsync(RoleName);
+            var user = await userManager.FindByNameAsync(UserName);
+            await userManager.AddToRoleAsync(user,RoleName);
+            return RedirectToAction("Index");
+        }
+        [HttpPost]
+        public async Task<IActionResult> Create(RoleViewModel Model)
+        {
+            IdentityRole identityRole = new IdentityRole { Name = Model.CreateRoleViewModel.Name };
+            var result = await roleManager.CreateAsync(identityRole);
+            if (result.Succeeded)
             {
-                IdentityRole identityRole = new IdentityRole { Name = Model.Name };
-                var result = await roleManager.CreateAsync(identityRole);
-                if (result.Succeeded)
-                {
-                    return RedirectToAction("Index");
-                }
-                foreach(var error in result.Errors)
-                {
-                    ModelState.AddModelError("", error.Description);
-                }
+                return RedirectToAction("Index");
             }
-            
+            foreach (var error in result.Errors)
+            {
+                ModelState.AddModelError("", error.Description);
+            }
             return RedirectToAction("Index");
         }
         public async Task<IActionResult> Edit(string ID)
@@ -59,6 +70,42 @@ namespace MVCBasics.Controllers
                 }
             }
             return View(CRVM);
+        }
+        [HttpPost]
+        public async Task<IActionResult> Edit(CreateRoleViewModel crvm)
+        {
+            var role = await roleManager.FindByIdAsync(crvm.ID);
+            role.Name = crvm.Name;
+            await roleManager.UpdateAsync(role);
+            foreach (var user in userManager.Users)
+            {
+                if (await userManager.IsInRoleAsync(user, crvm.Name))
+                {
+                    crvm.RoleUsers.Add(user);
+                }
+            }
+            return View(crvm);
+        }
+        public async Task<IActionResult> RoleDetails(string RoleName)
+        {
+            CreateRoleViewModel CRVM = new CreateRoleViewModel();
+            var role = await roleManager.FindByNameAsync(RoleName);
+            CRVM.ID = role.Id;
+            CRVM.Name = RoleName;
+            foreach (var user in userManager.Users)
+            {
+                if (await userManager.IsInRoleAsync(user, role.Name))
+                {
+                    CRVM.RoleUsers.Add(user);
+                }
+            }
+            return PartialView("_RoleDetailsPartial", CRVM);
+        }
+        public async Task<IActionResult> Delete(string RoleName)
+        {
+            var role = await roleManager.FindByNameAsync(RoleName);
+            await roleManager.DeleteAsync(role);
+            return RedirectToAction("Index");
         }
     }
 }

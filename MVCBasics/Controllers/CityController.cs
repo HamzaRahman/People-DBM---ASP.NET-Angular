@@ -5,6 +5,7 @@ using MVCBasics.Services;
 
 namespace MVCBasics.Controllers
 {
+    [Authorize(Roles ="Admin")]
     public class CityController : Controller
     {
         ICityService CS;
@@ -15,7 +16,6 @@ namespace MVCBasics.Controllers
             CS = _CS;
             cos = Cos;
         }
-        [Authorize]
         public IActionResult Index()
         {
             CityViewModel CVM = new CityViewModel();
