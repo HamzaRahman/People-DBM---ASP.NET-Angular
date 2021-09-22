@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using MVCBasics.Models;
 using MVCBasics.Services;
+using System.Threading.Tasks;
 
 namespace MVCBasics.Controllers
 {
@@ -51,9 +52,9 @@ namespace MVCBasics.Controllers
             LVPM.Model = LS.FindBy(ID);
             return PartialView("_LanguageDetailsPartial", LVPM);
         }
-        public IActionResult Delete(int ID)
+        public async Task<IActionResult> Delete(int ID)
         {
-            if (LS.Remove(ID))
+            if (await LS.Remove(ID))
             {
                 
                 ViewBag.Message = "Deleted";

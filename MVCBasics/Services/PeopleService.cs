@@ -2,6 +2,7 @@
 using MVCBasics.Repository;
 using System;
 using System.Linq;
+using System.Threading.Tasks;
 
 namespace MVCBasics.Services
 {
@@ -22,11 +23,11 @@ namespace MVCBasics.Services
             PeopleDatabase.Create(person.Name, person.PhoneNumber, person.City);
             return person.Model;
         }
-        public PersonLanguage AddToPerson(string LID, int PID)
+        public async Task<PersonLanguage> AddToPerson(string LID, int PID)
         {
-            var AllL = LanguageDatabase.Read();
+            var AllL = await LanguageDatabase.Read();
             var Language = AllL.FirstOrDefault(lang => lang.Name == LID);
-            return PeopleDatabase.AddToPerson(Language, PID);
+            return await PeopleDatabase.AddToPerson(Language, PID);
         }
         PeopleViewModel pvm = new PeopleViewModel();
         public PeopleViewModel All()

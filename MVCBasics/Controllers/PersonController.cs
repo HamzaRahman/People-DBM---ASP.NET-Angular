@@ -17,18 +17,14 @@ namespace MVCBasics.Controllers
         IPeopleService ps;
         private readonly ICityService CS;
         private readonly ILanguageService lS;
-        private City SelectedCity = new City();
+        PeopleViewModel PV = new PeopleViewModel();
         public PersonController(IPeopleService _ps,ICityService _CS,ILanguageService LS)
         {
             ps = _ps;
             CS = _CS;
             lS = LS;
         }
-        public void AddSelectedCity(int ID)
-        {
-            SelectedCity = CS.FindBy(ID);
-        }
-        public IActionResult Index(PeopleViewModel search)
+        public async Task<IActionResult> Index(PeopleViewModel search)
         {
             //Use Below Code For Table Data If Not Using AJAX
             //if (string.IsNullOrEmpty(search.SearchPhrase))
@@ -36,21 +32,18 @@ namespace MVCBasics.Controllers
             //    return View(ps.All());
             //}
             //return View(ps.FindBy(search));
-            PeopleViewModel PV = new PeopleViewModel();
+            
             PV.AllCities = CS.All().Cities;
-            PV.AllLanguages = lS.All().Languages;
+            var pvm = await lS.All();
+            PV.AllLanguages = pvm.Languages;
             return View(PV);
         }
-        public IActionResult AddToPerson(string LID, int PID)
+        public async Task<IActionResult> AddToPerson(string LID, int PID)
         {
-            ps.AddToPerson(LID, PID);
+            var task = ps.AddToPerson(LID, PID);
+            task.Wait();
             return RedirectToAction("Index");
         }
-        //Use Below Method For Separate Create Page
-        //public IActionResult Create()
-        //{ 
-        //    return View();
-        //}
         [HttpPost]
         [ValidateAntiForgeryToken]
         public IActionResult Create(PeopleViewModel m)
@@ -91,32 +84,21 @@ namespace MVCBasics.Controllers
         ///
         public IActionResult PeopleIndex(string search)
         {
-            PeopleViewModel PVM = new PeopleViewModel();
-            PVM.SearchPhrase = search;
-            if (string.IsNullOrEmpty(PVM.SearchPhrase))
+            PV.SearchPhrase = search;
+            if (string.IsNullOrEmpty(PV.SearchPhrase))
             {
                 return PartialView("_PeopleIndex", ps.All());
             }
-            return PartialView("_PeopleIndex", ps.FindBy(PVM));
+            return PartialView("_PeopleIndex", ps.FindBy(PV));
         }
-        public IActionResult PersonDetails(int ID)
+        public async Task<IActionResult> PersonDetails(int ID)
         {
-            CreatePersonViewModel CVPM = new CreatePersonViewModel();
-            CVPM.Model = ps.FindBy(ID);
-            return PartialView("_PersonDetails",CVPM);
+            PV.CreatePerson = new CreatePersonViewModel();
+            PV.CreatePerson.Model = ps.FindBy(ID);
+            PV.CreatePerson.ID = ID;
+            var pvm = await lS.All();
+            PV.AllLanguages = pvm.Languages;
+            return PartialView("_PersonDetails",PV);
         }
-        //public IActionResult GetData()
-        //{
-        //    var all = ps.All();
-        //    List<Person> people = new List<Person>();
-        //    people = all.people;
-        //    Person p = new Person();
-        //    p.ID = 1;
-        //    p.Name = "Hamza";
-        //    p.PhoneNumber = 00;
-        //    p.city = "dff";
-        //    people.Add(p);
-        //    return PartialView("_Person",people.Last());
-        //}
     }
 }

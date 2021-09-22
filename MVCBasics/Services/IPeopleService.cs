@@ -9,7 +9,7 @@ namespace MVCBasics.Services
     public interface IPeopleService
     {
         Person Add(CreatePersonViewModel person);
-        PersonLanguage AddToPerson(string LID, int PID);
+        Task<PersonLanguage> AddToPerson(string LID, int PID);
         PeopleViewModel All();
         PeopleViewModel FindBy(PeopleViewModel Search);
         Person FindBy(int ID);

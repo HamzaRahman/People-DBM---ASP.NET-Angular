@@ -10,7 +10,7 @@ namespace MVCBasics.Repository
     {
         Language Create(string Name);
         PersonLanguage AddToPerson(int language, Person person);
-        List<Language> Read();
+        Task<List<Language>> Read();
         Language Read(int ID);
         Language Update(Language language);
         bool Delete(Language language);

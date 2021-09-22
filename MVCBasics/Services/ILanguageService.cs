@@ -10,10 +10,10 @@ namespace MVCBasics.Services
     {
         Language Add(CreateLanguageViewModel language);
         PersonLanguage AddToPerson(int LID, string PersonName);
-        LanguageViewModel All();
+        Task<LanguageViewModel> All();
         LanguageViewModel FindBy(LanguageViewModel Search);
         Language FindBy(int ID);
         Language Edit(int ID, Language person);
-        bool Remove(int ID);
+        Task<bool> Remove(int ID);
     }
 }

@@ -25,13 +25,13 @@ namespace MVCBasics.Repository
             _DB.SaveChanges();
             return p;
         }
-        public PersonLanguage AddToPerson(Language language, int personID)
+        public async Task<PersonLanguage> AddToPerson(Language language, int personID)
         {
             PersonLanguage p = new PersonLanguage();
             p.LanguageID = language.ID;
             p.PersonID = personID;
-            _DB.PersonLanguage.Add(p);
-            _DB.SaveChanges();
+            await _DB.PersonLanguage.AddAsync(p);
+            await _DB.SaveChangesAsync();
             return p;
         }
         public bool Delete(Person person)

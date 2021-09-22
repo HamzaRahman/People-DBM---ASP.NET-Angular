@@ -42,9 +42,9 @@ namespace MVCBasics.Repository
             return false;
         }
 
-        public List<Language> Read()
+        public async Task<List<Language>> Read()
         {
-            return _DB.Language.ToList();
+            return await _DB.Language.ToListAsync();
         }
 
         public Language Read(int ID)

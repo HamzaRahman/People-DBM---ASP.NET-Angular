@@ -28,9 +28,9 @@ namespace MVCBasics.Services
             return LanguageDatabase.AddToPerson(LID, person);
         }
         LanguageViewModel LVM = new LanguageViewModel();
-        public LanguageViewModel All()
+        public async Task<LanguageViewModel> All()
         {
-            LVM.Languages = LanguageDatabase.Read();
+            LVM.Languages = await LanguageDatabase.Read();
             return LVM;
         }
 
@@ -49,9 +49,9 @@ namespace MVCBasics.Services
             return LanguageDatabase.Read(ID);
         }
 
-        public bool Remove(int ID)
+        public async Task<bool> Remove(int ID)
         {
-            var languages = LanguageDatabase.Read();
+            var languages = await LanguageDatabase.Read();
             var language = languages.Where(p => p.ID == ID).FirstOrDefault();
             return LanguageDatabase.Delete(language);
         }

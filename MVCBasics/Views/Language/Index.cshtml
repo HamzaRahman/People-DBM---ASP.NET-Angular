@@ -6,21 +6,11 @@
 
 <h1>Index</h1>
 
-@* Use the form below for search if not using AJAX *@
-<!--<form style="float:right;">-->
-@*<input type="submit" value="Search" class="btn btn-primary" style="float: right" />*@
-<!--<input id="search" asp-for="SearchPhrase" class="form-control" style="float: right; width: 30%" />
-    <label class="control-label" style="float:right;">Search By Anything</label>
-</form>-->
+<div>
+    <input type="text" id="DetailsID" />
+    <label>Enter A Language's ID' To View Its Details Or Delete It</label>
+</div>
 
-@*<a asp-action="Create"
-   style="float:right;
-clear:both; background:skyblue;
-display:block;
-text-decoration:none;
-border-radius:5px;margin:10px">Create New</a>*@
-
-<input type="text" id="DetailsID" />
 <input type="button" value="Languages" id="LoadLanguages" />
 <input type="button" value="Details" id="LanguageDetails" />
 <input type="button" value="Delete" id="LanguageDelete" />
@@ -76,10 +66,6 @@ border-radius:5px;margin:10px">Create New</a>*@
         $("#LanguageDetails").click(function () {
             var id = $("#DetailsID").val();
             $('#LanguageTable').load("/Language/LanguageDetails", { ID: id });
-            //$('#LT').empty();
-            //$('#LT').append("<input id='AddPersonBT' type='button' value='Add' class='btn btn - primary' style='float: left; clear: both;background:skyblue' />")
-            //$('#LT').append("<input id='PersonID' class='form-control' style='float: left; width: 20%;' />")
-            //$('#LT').append("Enter A Person's ID To Add That Person With This Language")
         });
 
         $("#LanguageDelete").click(function () {
