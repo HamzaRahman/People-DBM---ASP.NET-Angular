@@ -1,11 +1,11 @@
 ﻿@model MVCBasics.Models.CreateCountryViewModel
 
 <div>
-    <h4>City Details</h4>
+    <h4>Country Details</h4>
     <hr />
     <dl class="row">
         <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Name)
+            Country Name
         </dt>
         <dd class="col-sm-10">
             @Html.DisplayFor(model => model.Name)
@@ -20,7 +20,10 @@
                     ID
                 </div>
                 <div class="col-sm-2">
-                    Name
+                    City
+                </div>
+                <div class="col-sm-2">
+                    Country
                 </div>
             </div>
         </div>

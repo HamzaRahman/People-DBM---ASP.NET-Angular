@@ -78,8 +78,8 @@ namespace MVCBasics
                 // your components as well as all of their dependencies.
                 // See http://reactjs.net/ for more information. Example:
                 config
-                  .AddScript("~/js/remarkable.min.js")
-                  .AddScript("~/js/jsx.jsx")
+                  //.AddScript("~/js/remarkable.min.js")
+                  .AddScript("/js/People.jsx")
                   ;
                 //config
                 //  .AddScript("~/js/First.jsx")
