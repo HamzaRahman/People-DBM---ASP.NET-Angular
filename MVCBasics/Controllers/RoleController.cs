@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace MVCBasics.Controllers
 {
-    [Authorize(Roles = "Admin")]
+    //[Authorize(Roles = "Admin")]
     public class RoleController : Controller
     {
         private readonly RoleManager<IdentityRole> roleManager;

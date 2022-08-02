@@ -53,11 +53,11 @@ namespace MVCBasics.Models
         {
             get
             {
-                return Model.City;
+                return Model.Cities;
             }
             set
             {
-                Model.City = value;
+                Model.Cities = value;
             }
         }
     }

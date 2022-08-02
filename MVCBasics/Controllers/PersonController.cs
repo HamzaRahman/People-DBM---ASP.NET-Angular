@@ -10,7 +10,9 @@ using System.Threading.Tasks;
 
 namespace MVCBasics.Controllers
 {
-    [Authorize]
+    //[Authorize]
+    [ApiController]
+    [Route("[controller]")]
     public class PersonController : Controller
     {
         //Constructor Injection--Fetching IPeopleService Object from Startup ConfigureServices
@@ -24,6 +26,15 @@ namespace MVCBasics.Controllers
             CS = _CS;
             lS = LS;
         }
+        [HttpGet]
+        public async Task<PeopleViewModel> Get()
+        {
+            PV.AllCities = CS.All().Cities;
+            var pvm = await lS.All();
+            PV.AllLanguages = pvm.Languages;
+            PV = ps.All();
+            return PV;
+        }
         public async Task<IActionResult> Index(PeopleViewModel search)
         {
             //Use Below Code For Table Data If Not Using AJAX
@@ -34,6 +45,7 @@ namespace MVCBasics.Controllers
             //return View(ps.FindBy(search));
             
             PV.AllCities = CS.All().Cities;
+            
             var pvm = await lS.All();
             PV.AllLanguages = pvm.Languages;
             return View(PV);
@@ -76,6 +88,8 @@ namespace MVCBasics.Controllers
             }
             //return RedirectToAction("Index");
             //return Json(new { success = false, responseText = "not deleted" });
+
+            //Not working because ViewBag gets initialized at page load only
             ViewBag.Message = "Not Deleted";
             return NotFound();
         }
@@ -87,7 +101,7 @@ namespace MVCBasics.Controllers
             PV.SearchPhrase = search;
             if (string.IsNullOrEmpty(PV.SearchPhrase))
             {
-                return PartialView("_PeopleIndex", ps.All());
+                return PartialView("_ReactIndex", ps.All());
             }
             return PartialView("_PeopleIndex", ps.FindBy(PV));
         }

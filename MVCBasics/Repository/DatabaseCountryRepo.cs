@@ -48,7 +48,7 @@ namespace MVCBasics.Repository
 
         public Country Read(int ID)
         {
-            return _DB.Country.Include(city => city.City).FirstOrDefault(country => country.ID == ID);
+            return _DB.Country.Include(city => city.Cities).FirstOrDefault(country => country.ID == ID);
         }
 
         public Country Update(Country country)

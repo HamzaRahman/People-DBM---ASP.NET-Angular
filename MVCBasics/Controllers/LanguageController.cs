@@ -36,13 +36,13 @@ namespace MVCBasics.Controllers
             LS.AddToPerson(LID, PersonName);
             return RedirectToAction("Index");
         }
-        public IActionResult LanguageIndex(string search)
+        public async Task<IActionResult> LanguageIndex(string search)
         {
             LanguageViewModel LVM = new LanguageViewModel();
             LVM.SearchPhrase = search;
             if (string.IsNullOrEmpty(LVM.SearchPhrase))
             {
-                return PartialView("_LanguageListPartial", LS.All());
+                return PartialView("_LanguageListPartial", await LS.All());
             }
             return PartialView("_LanguageListPartial", LS.FindBy(LVM));
         }

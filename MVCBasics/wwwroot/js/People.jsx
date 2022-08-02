@@ -70,17 +70,22 @@
 
 class PeopleList extends React.Component {
     render() {
+        //const { person, city } = this.props.data;
         var personNodes = this.props.data.map(function (person) {
             return (
-                <PersonItem ID={person.ID} Name={person.Name} PhoneNumber={person.PhoneNumber} City={person.City}></PersonItem>
+                <PersonItem EE={person.id} Name={person.name} PhoneNumber={person.phoneNumber} City={person.city}></PersonItem>
+                
             );
         });
-        return <div className="peopleList">{personNodes}</div>;
+        return (
+            <div className="peopleList">{personNodes}</div>
+            );
     }
 }
 
 class PersonItem extends React.Component
 {
+    
     render()
     {
         
@@ -89,7 +94,7 @@ class PersonItem extends React.Component
                 <hr />
                     <div class="row">
                     <div class="col-sm-2">
-                        {this.props.ID}
+                        {this.props.EE}
                     </div>
                     <div class="col-sm-2">
                         {this.props.Name}
@@ -101,14 +106,15 @@ class PersonItem extends React.Component
                         {this.props.City}
                     </div>
                     <div class="col-sm-1">
-                        {/*@Html.ActionLink("Edit", "Edit","Person",new { id = Model.ID })*/}
+                        Edit
                     </div>
                     <div class="col-sm-1">
-                        {/*@*@Html.ActionLink("Details", "Edit", new { id = Model.ID })*@*/}
+                        Details
                     </div>
                     <div class="col-sm-1">
-                       {/* @*@Html.ActionLink("Delete", "Delete", new { id = Model.ID })*@*/}
+                       Delete
                     </div>
+                    {/*<span dangerouslySetInnerHTML={this.rawMarkup()} />*/}
                 </div>
             </div>
             )

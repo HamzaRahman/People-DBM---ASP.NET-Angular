@@ -11,7 +11,7 @@ namespace MVCBasics.Models
         [Key]
         public int ID { get; set; }
         public string Name { get; set; }
-        public List<City> City { get; set; } = new List<City>();
+        public List<City> Cities { get; set; } = new List<City>();
         public override string ToString()
         {
             return Name;

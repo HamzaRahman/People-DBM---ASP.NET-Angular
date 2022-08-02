@@ -18,7 +18,7 @@ namespace MVCBasics.Repository
         {
             City c = new City();
             c.Name = Name;
-            _DB.Country.FirstOrDefault(c => c.Name == country.Name).City.Add(c);
+            _DB.Country.FirstOrDefault(c => c.Name == country.Name).Cities.Add(c);
             _DB.City.Add(c);
             _DB.SaveChanges();
             return c;

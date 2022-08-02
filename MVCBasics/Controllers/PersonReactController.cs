@@ -20,11 +20,18 @@ namespace MVCBasics.Controllers
             CS = _CS;
             lS = LS;
         }
-        public IActionResult Index()
+        public async Task<IActionResult> People()
         {
+            //PV.AllCities = CS.All().Cities;
+            //PV.people = ps.All().people;
+            //var pvm = await lS.All();
+            //PV.AllLanguages = pvm.Languages;
+            
             return View(ps.All());
         }
-        public IActionResult People()
+        
+        //[ResponseCache(Location = ResponseCacheLocation.None, NoStore = true)]
+        public IActionResult Index()
         {
             return Json(ps.All());
         }
