@@ -1,7 +1,7 @@
 # People Database Management | Relational Data Including City, Languages, Country.
-Angular Fronted
-Razor Pages Fronted also implemented
-MVC Pattern
+Angular Fronted<br/>
+Razor Pages Fronted also implemented<br/>
+MVC Pattern<br/>
 Entity Framework Core.<br/>
 Entity Framework Core Identity.<br/>
 Microsoft SQL Server.<br/>
