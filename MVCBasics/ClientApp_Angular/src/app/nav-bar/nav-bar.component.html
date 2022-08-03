@@ -1,5 +1,8 @@
 <header>
   <nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <div class="navbar-brand">
+      People DB
+    </div>
     <div class="nav-item">
       <button class="btn" style="color:blue"
               type="button"
@@ -17,9 +20,9 @@
       <a class="nav-link text-dark">Home</a>
     </div>
     <div class="nav-item">
-      <a [routerLink]="['/person']">People</a>
+      <a [routerLink]="['/People']">People</a>
     </div>
-    <div class="nav-item" [routerLinkActive]="['link-active']">
+    <div class="nav-item" [routerLinkActive]="['/People']">
       <a class="nav-link text-dark">Cities</a>
     </div>
   </nav>

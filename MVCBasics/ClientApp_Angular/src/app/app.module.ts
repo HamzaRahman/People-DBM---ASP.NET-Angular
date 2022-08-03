@@ -8,6 +8,7 @@ import { AppComponent } from './app.component';
 import { NavBarComponent } from './nav-bar/nav-bar.component';
 import { PeopleComponent } from './people/people.component';
 import { PersonComponent } from './person/person.component';
+import { PeopleService } from './people.service';
 
 export function getBaseUrl() {
   return document.getElementsByTagName('base')[0].href;
@@ -28,10 +29,13 @@ const providers = [
     AppRoutingModule,
     HttpClientModule,
     RouterModule.forRoot([
-      { path: 'person', component: PeopleComponent }
+      { path: 'People', component: PeopleComponent }
     ])
   ],
-  providers: [{ provide: 'BASE_URL', useFactory: getBaseUrl, deps: [] }],
+  providers: [
+    { provide: 'BASE_URL', useFactory: getBaseUrl, deps: [] },
+    PeopleService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

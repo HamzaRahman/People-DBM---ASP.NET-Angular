@@ -1,6 +1,7 @@
 import { Component, OnInit, Inject } from '@angular/core';
 import { Person } from "../person.model";
 import { HttpClient } from '@angular/common/http';
+import { PeopleService } from '../people.service';
 @Component({
   selector: 'app-people',
   templateUrl: './people.component.html',
@@ -9,13 +10,11 @@ import { HttpClient } from '@angular/common/http';
 export class PeopleComponent implements OnInit {
   public people: Person[] = [];
 
-  constructor(http: HttpClient, @Inject('BASE_URL') baseUrl: string)
+  constructor(pservice: PeopleService)
   {
-    //this.people.push({ id: 1, name: "Hamza", phoneNumber: 304 })
-    http.get<Person[]>(baseUrl + 'person').subscribe(result => {
-      this.people = result;
-    }, error => console.error(error));
-    for (let person of this.people) {
+    pservice.getPeople().subscribe(result => { this.people = result; });
+    for (let person of this.people)
+    {
       console.log(person.id);
     }
   }
