@@ -27,13 +27,13 @@ namespace MVCBasics.Controllers
             lS = LS;
         }
         [HttpGet]
-        public async Task<PeopleViewModel> Get()
+        public async Task<List<Person>> Get()
         {
             PV.AllCities = CS.All().Cities;
             var pvm = await lS.All();
             PV.AllLanguages = pvm.Languages;
             PV = ps.All();
-            return PV;
+            return PV.people;
         }
         public async Task<IActionResult> Index(PeopleViewModel search)
         {

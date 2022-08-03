@@ -11,7 +11,7 @@ export class NavBarComponent implements OnInit {
 
   ngOnInit(): void {
   }
-  isExpanded = false;
+  isExpanded = true;
 
   collapse() {
     this.isExpanded = false;

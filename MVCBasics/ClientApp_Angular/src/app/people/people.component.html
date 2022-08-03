@@ -1,17 +1,3 @@
-<table class='table table-striped' aria-labelledby="tableLabel" *ngIf="people">
-  <thead>
-    <tr>
-      <th>ID</th>
-      <th>Name</th>
-      <th>PN</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr *ngFor="let person of people">
-      <td>{{ person.id }}</td>
-      <td>{{ person.name }}</td>
-      <td>{{ person.phoneNumber }}</td>
-      
-    </tr>
-  </tbody>
-</table>
+<div *ngFor="let person of people" class="card-container">
+  <app-person [person]="person"></app-person>
+</div>
