@@ -18,21 +18,21 @@ A city can have one & only one country<br/>
 A country can have one or multiple cities<br/>
 
 # Notes:
-Both Web Api and Angular App run on same address
+Both Web Api and Angular App run on same address<br/>
 
-Tip: Your angular routes should be different from ASP.Net Web Api endpoints.(They can also be same)
+Tip: Your angular routes should be different from ASP.Net Web Api endpoints.(They can also be same)<br/>
 
-If you want to match Angular routes with ASP.Net Web Api endpoints,
-Consider following things:
-1. So if you route to an address through Angular, it will show you webpage
-2. and if you hit enter in address bar on that address, you will get ASP.Net Web Api's Json Body
-2. So you can run them on separate adresses
-and for that, your ASP.Net project should have following code in Startup.cs file
+If you want to match Angular routes with ASP.Net Web Api endpoints,<br/>
+Consider following things:<br/>
+1. So if you route to an address through Angular, it will show you webpage<br/>
+2. and if you hit enter in address bar on that address, you will get ASP.Net Web Api's Json Body<br/>
+2. So you can run them on separate adresses<br/>
+and for that, your ASP.Net project should have following code in Startup.cs file<br/>
 
             app.UseCors(x => x
             .AllowAnyOrigin()
             .AllowAnyMethod()
             .AllowAnyHeader());
- before
+ before<br/>
             app.UseHttpsRedirection();
 
