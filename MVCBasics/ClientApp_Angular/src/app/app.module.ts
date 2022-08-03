@@ -2,13 +2,12 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { HttpClientModule } from '@angular/common/http';
 import { RouterModule } from '@angular/router';
-import { Person } from './person.model';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { NavBarComponent } from './nav-bar/nav-bar.component';
 import { PeopleComponent } from './people/people.component';
-import { PersonComponent } from './person/person.component';
-import { PeopleService } from './people.service';
+import { PersonComponent } from './people/person/person.component';
+import { PeopleService } from './people/services/people.service';
 
 export function getBaseUrl() {
   return document.getElementsByTagName('base')[0].href;

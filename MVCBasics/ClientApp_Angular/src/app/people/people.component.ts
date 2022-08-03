@@ -1,7 +1,6 @@
-import { Component, OnInit, Inject } from '@angular/core';
-import { Person } from "../person.model";
-import { HttpClient } from '@angular/common/http';
-import { PeopleService } from '../people.service';
+import { Component, OnInit } from '@angular/core';
+import { Person } from "./models/person.model";
+import { PeopleService } from './services/people.service';
 @Component({
   selector: 'app-people',
   templateUrl: './people.component.html',

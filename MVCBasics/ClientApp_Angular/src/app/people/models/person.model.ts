@@ -1,5 +1,5 @@
-import { City } from './city.model';
-import { PersonLanguage } from './person-language.model';
+import { City } from 'src/app/models/city.model';
+import { PersonLanguage } from 'src/app/models/person-language.model';
 export class Person
 {
   constructor(public id?: number,

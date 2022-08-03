@@ -1,5 +1,5 @@
 import { Component, OnInit,Input } from '@angular/core';
-import { Person } from "../person.model";
+import { Person } from "../models/person.model";
 @Component({
   selector: 'app-person',
   templateUrl: './person.component.html',

@@ -1,4 +1,4 @@
-import { Person } from "./person.model";
+import { Person } from "../people/models/person.model";
 import { Country } from "./country.model";
 export class City
 {
