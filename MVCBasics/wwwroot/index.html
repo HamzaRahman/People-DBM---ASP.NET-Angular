@@ -1,0 +1,27 @@
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TestProd</title>
+    <!-- <base href="/"> -->
+    <script>
+        window.baseUrl = window.location.pathname.substring(0, window.location.pathname.lastIndexOf('/') + 1);
+        document.write('<base href="' + window.baseUrl + '" />');
+
+    </script>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="icon" type="image/x-icon" href="favicon.ico">
+</head>
+
+<body style="
+background-color: #cadadb;">
+    <app-root></app-root>
+    <script type="text/javascript" src="runtime.bundle.js"></script>
+    <script type="text/javascript" src="polyfills.bundle.js"></script>
+    <script type="text/javascript" src="app.bundle.js"></script>
+    <script type="text/javascript" src="styles.bundle.js"></script>
+    <script type="text/javascript" src="web.config.bundle.js"></script>
+</body>
+
+</html>

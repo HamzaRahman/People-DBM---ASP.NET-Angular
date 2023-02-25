@@ -13,7 +13,11 @@
         <div class="col-sm-2">
             @Html.DisplayFor(model => model.City.Name)
         </div>
+        <div class="col-sm-2">
+            @Html.DisplayFor(model => model.City.Country.Name)
+        </div>
         <div class="col-sm-1">
+            @Html.Raw("<a _ngcontent-udi-c3=\"\" ng-reflect-router-link=\"/people/perso/1\" href=\"/people/perso/1\">Open Cell</a>")
             @Html.ActionLink("Edit", "Edit","Person",new { id = Model.ID })
         </div>
         <div class="col-sm-1">

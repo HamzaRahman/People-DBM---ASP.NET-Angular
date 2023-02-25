@@ -26,7 +26,8 @@ namespace MVCBasics.Controllers
             CS = _CS;
             lS = LS;
         }
-        [HttpGet]
+        //[HttpGet]
+        [Route("Get")]
         public async Task<List<Person>> Get()
         {
             PV.AllCities = CS.All().Cities;
@@ -35,7 +36,9 @@ namespace MVCBasics.Controllers
             PV = ps.All();
             return PV.people;
         }
-        public async Task<IActionResult> Index(PeopleViewModel search)
+        //[HttpGet]
+        //[Route("Index")]
+        public async Task<IActionResult> Index(/*PeopleViewModel search*/)
         {
             //Use Below Code For Table Data If Not Using AJAX
             //if (string.IsNullOrEmpty(search.SearchPhrase))
@@ -96,14 +99,15 @@ namespace MVCBasics.Controllers
 
         ///////////////////////// ACTIONS for AJAX
         ///
+        [Route("PeopleHTML")]
         public IActionResult PeopleIndex(string search)
         {
             PV.SearchPhrase = search;
             if (string.IsNullOrEmpty(PV.SearchPhrase))
             {
-                return PartialView("_ReactIndex", ps.All());
+                return PartialView("_PeopleIndex", ps.All());
             }
-            return PartialView("_PeopleIndex", ps.FindBy(PV));
+            return PartialView("_PeopleIndex", ps.All());
         }
         public async Task<IActionResult> PersonDetails(int ID)
         {

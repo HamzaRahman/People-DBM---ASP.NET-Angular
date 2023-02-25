@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using MVCBasics.Models;
+using PeopleDB.Models.CheckList;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -42,5 +43,11 @@ namespace MVCBasics.Repository
         public DbSet<Country> Country { get; set; }
         public DbSet<Language> Language { get; set; }
         public DbSet<PersonLanguage> PersonLanguage { get; set; }
+
+        public DbSet<CheckList> CheckList { get; set; }
+        public DbSet<CheckListParam> CheckListParam { get; set; }
+        public DbSet<CheckListQuestion> CheckListQuestion { get; set; }
+        public DbSet<Keyword> Keyword { get; set; }
+
     }
 }

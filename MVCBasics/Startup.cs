@@ -1,4 +1,4 @@
-using Microsoft.AspNetCore.Builder;
+﻿using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -15,6 +15,7 @@ using Newtonsoft.Json.Serialization;
 using JavaScriptEngineSwitcher.V8;
 using JavaScriptEngineSwitcher.Extensions.MsDependencyInjection;
 using React.AspNet;
+using PeopleDB.Hubs;
 
 namespace MVCBasics
 {
@@ -58,13 +59,13 @@ namespace MVCBasics
               .AddV8();*/
 
             services.AddControllersWithViews();
+            services.AddSignalR();
 
 
-
-            services.AddSpaStaticFiles(configuration =>
-            {
-                configuration.RootPath = "ClientApp_Angular/dist";
-            });
+            //services.AddSpaStaticFiles(configuration =>
+            //{
+            //    configuration.RootPath = "ClientApp_Angular/dist";
+            //});
 
 
         }
@@ -89,7 +90,7 @@ namespace MVCBasics
             .AllowAnyHeader());
 
             app.UseHttpsRedirection();
-
+            app.UseDefaultFiles();
             /*app.UseReact(config =>
             {
                 // If you want to use server-side rendering of React components,
@@ -113,31 +114,35 @@ namespace MVCBasics
             });*/
 
             app.UseStaticFiles();
-            if (!env.IsDevelopment())
-            {
-                app.UseSpaStaticFiles();
-            }
+            //if (!env.IsDevelopment())
+            //{
+            //    app.UseSpaStaticFiles();
+            //}
             app.UseRouting();
             app.UseAuthentication();
             app.UseAuthorization();
-
+            app.UseEndpoints(endpoints =>
+            {
+                endpoints.MapHub<ChartHub>("/notify");
+            });
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllerRoute(
                     name: "default",
-                    pattern: "{controller}/{action=Index}/{id?}");
+                    //pattern: "{controller}/{action}/{id?}");
+                pattern: "{controller=Person}/{action=Index}/{id?}");
             });
             app.UseSpa(spa =>
             {
                 // To learn more about options for serving an Angular SPA from ASP.NET Core,
                 // see https://go.microsoft.com/fwlink/?linkid=864501
 
-                spa.Options.SourcePath = "ClientApp_Angular";
+                //spa.Options.SourcePath = @"C:\Users\h.rehman\Downloads\AngularProjects\test-prod";
 
-                if (env.IsDevelopment())
-                {
-                    spa.UseAngularCliServer(npmScript: "start");
-                }
+                //if (env.IsDevelopment())
+                //{
+                //    spa.UseAngularCliServer(npmScript: "start");
+                //}
             });
 
         }
